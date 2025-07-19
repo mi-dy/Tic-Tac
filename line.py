@@ -4,8 +4,9 @@ class Line():
     def __init__(self, line):
         self.line = line
 
-    def check(self, line):
-        if all[line] == "x":
-            sys.exit("Wictory royal!")
-        elif all[line] == "o":
+    def check_victory(self, line):
+        if all(item == "x" for item in line):
+            sys.exit("Victory royal!")
+        elif all(item == "o" for item in line):
             sys.exit("Loser!")
+        return None

@@ -1,15 +1,11 @@
+import sys
+
 class Board:
-    def __init__(self, sq1=" ", sq2=" ", sq3=" ", sq4=" ", sq5=" ", sq6=" ", sq7=" ", sq8=" ", sq9=" "):
-        self.sq1 = sq1
-        self.sq2 = sq2
-        self.sq3 = sq3
-        self.sq4 = sq4
-        self.sq5 = sq5
-        self.sq6 = sq6
-        self.sq7 = sq7
-        self.sq8 = sq8
-        self.sq9 = sq9
-    
+    def __init__(self, ln1=["", "", ""], ln2=["", "", ""], ln3=["", "", ""]):
+        self.ln1 = ln1
+        self.ln2 = ln2
+        self.ln3 = ln3
+
     def draw(self):
         print(f"{self.sq1}|{self.sq2}|{self.sq3}\n-----\n{self.sq4}|{self.sq5}|{self.sq6}\n-----\n{self.sq7}|{self.sq8}|{self.sq9}")
 
@@ -18,3 +14,27 @@ class Board:
 
     def place_o(self, position):
         setattr(self, position, "o")
+
+    def check_victory(self, board):
+
+        for line in board:
+            if all(item == "x" for item in line):
+                sys.exit("Vicotry royal!")
+            elif all(item == "o" for item in line):
+                sys.exit("Loser!")
+        
+        column = []
+        i = 0
+        for line in board:
+            column.append(line[i])
+        if all(item == "x" for item in column):
+            sys.exit("Vicotry royal!")
+        elif all(item == "o" for item in column):
+            sys.exit("Loser!")
+        
+        diagonal = []
+        j = 0
+        for line in board:
+            diagonal.append(line[j])
+            j += 1
+
