@@ -1,26 +1,33 @@
 import sys
 
 class Board:
-    def __init__(self, ln1=[" ", " ", " "], ln2=[" ", " ", " "], ln3=[" ", " ", " "]):
-        self.ln1 = ln1
-        self.ln2 = ln2
-        self.ln3 = ln3
+    def __init__(self):
+        self.board = [[" ", " ", " "]for _ in range(3)]
+
+
+    def __getitem__(self, coord):
+        return self.board[coord]
+
 
     def draw(self):
         i = 0
-        for line in [self.ln1, self.ln2, self.ln3]:
+        for line in self.board:
             print("|".join(item for item in line))
             if i <= 1:
                 print("------")
                 i += 1
 
-    def place_x(self, position):
-        setattr(self, position, "x")
 
-    def place_o(self, position):
-        setattr(self, position, "o")
+    def place_x(self, x, y):
+        self.board[x][y] = "x"
+
+
+    def place_o(self, x, y):
+        self.board[x][y] = "o"
+
 
     def check_victory(self, board):
+
 
         for line in board:
             if all(item == "x" for item in line):
@@ -28,6 +35,7 @@ class Board:
             elif all(item == "o" for item in line):
                 sys.exit("Loser!")
         
+
         column = []
         i = 0
         for line in board:
@@ -37,9 +45,12 @@ class Board:
         elif all(item == "o" for item in column):
             sys.exit("Loser!")
         
+
         diagonal = []
         j = 0
         for line in board:
             diagonal.append(line[j])
             j += 1
 
+
+        return None
